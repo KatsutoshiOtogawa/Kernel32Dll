@@ -19,8 +19,9 @@ jobs:
     steps:
       - name: Setup repo
         uses: actions/checkout@v3
-      - name: Install NuGet
-        run: Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
+
+      # - name: Install NuGet
+      #   run: Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
 
       - name: Get Tag Version
         id: tag_version
