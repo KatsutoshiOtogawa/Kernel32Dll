@@ -25,7 +25,7 @@ jobs:
 
       - name: Get Tag Version
         id: tag_version
-        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+        run: echo "::set-output name=tag::${GITHUB_REF##*/}"
       - name: Generate PSD1
         run: |
           $tagVersion = ${{ steps.tag_version.outputs.tag }}
