@@ -25,7 +25,7 @@ jobs:
 
       - name: Get Tag Version
         id: tag_version
-        run: echo ::set-output name=tag::$(git describe --tags --abbrev=0)
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       - name: Generate PSD1
         run: |
           $tagVersion = ${{ steps.tag_version.outputs.tag }}
@@ -35,7 +35,6 @@ jobs:
           $content  -replace '#tagVersion', "$tagVersion" |
             Set-Content -Path Kernel32Dll/Kernel32Dll.psd1
         
-          echo ( $content  -replace '#tagVersion', "$tagVersion")
       - name: Publish Module
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
