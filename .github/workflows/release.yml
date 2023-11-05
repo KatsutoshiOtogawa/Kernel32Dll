@@ -48,7 +48,7 @@ jobs:
             RequiredModules = @(
             )
           } | ConvertTo-Json
-          $psd1Content | Set-Content -Path Kernel32/Kernel32.psd1
+          $psd1Content | Set-Content -Path Kernel32Dll/Kernel32Dll.psd1
         
       - name: Publish Module
         env:
