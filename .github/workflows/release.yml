@@ -1,0 +1,63 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+  pull_request:
+    branches: ["main"]
+
+permissions:
+    contents: write
+
+jobs:
+  test:
+    runs-on: windows
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+      - name: Install NuGet
+        run: Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
+
+      - name: Get Tag Version
+        id: tag_version
+        run: echo ::set-output name=tag::$(git describe --tags --abbrev=0)
+      - name: Generate PSD1
+        run: |
+          $tagVersion = ${{ steps.tag_version.outputs.tag }}
+          $tagVersion = $tagVersion -replace '^v', ''  # 先頭の 'v' を削除
+          $psd1Content = @{
+            ModuleVersion = $tagVersion
+            Author = 'Otogawa Katsutoshi'
+            Description = 'Description of your module'
+            FunctionsToExport = '*'
+            CmdletsToExport = '*'
+            VariablesToExport = '*'
+            AliasesToExport = '*'
+            PrivateData = @{
+                PSData = @{
+                    ProjectUri = 'https://github.com/YourName/YourModule'
+                    LicenseUri = 'https://github.com/YourName/YourModule/blob/main/LICENSE'
+                    ReleaseNotes = 'Release notes for version 1.0'
+                }
+            }
+            RequiredModules = @(
+            )
+          } | ConvertTo-Json
+          $psd1Content | Set-Content -Path Kernel32/Kernel32.psd1
+        
+      - name: Publish Module
+        run: Publish-Module -Name 'Kernel32Dll' -Path 'Kernel32Dll' -NuGetApiKey ${{ secrets.NUGET_API_KEY }}
+
+      - name: Release tag
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
