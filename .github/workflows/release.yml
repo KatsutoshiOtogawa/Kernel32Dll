@@ -53,7 +53,7 @@ jobs:
       - name: Publish Module
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: Publish-Module -Name 'Kernel32Dll' -Path 'Kernel32Dll' -NuGetApiKey  "$env:NUGET_API_KEY"
+        run: Publish-Module -Path ./Kernel32Dll -NuGetApiKey  "$env:NUGET_API_KEY"
 
       - name: Release tag
         uses: softprops/action-gh-release@v1
