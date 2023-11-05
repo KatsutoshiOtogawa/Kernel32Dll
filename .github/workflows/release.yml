@@ -9,11 +9,12 @@ on:
     branches: ["main"]
 
 permissions:
-    contents: write
+  # for create release tag
+  contents: write
 
 jobs:
   test:
-    runs-on: windows
+    runs-on: windows-2019
 
     steps:
       - name: Setup repo
@@ -49,7 +50,9 @@ jobs:
           $psd1Content | Set-Content -Path Kernel32/Kernel32.psd1
         
       - name: Publish Module
-        run: Publish-Module -Name 'Kernel32Dll' -Path 'Kernel32Dll' -NuGetApiKey ${{ secrets.NUGET_API_KEY }}
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: Publish-Module -Name 'Kernel32Dll' -Path 'Kernel32Dll' -NuGetApiKey  "$env:NUGET_API_KEY"
 
       - name: Release tag
         uses: softprops/action-gh-release@v1
