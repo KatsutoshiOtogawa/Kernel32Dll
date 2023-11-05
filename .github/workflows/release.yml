@@ -31,11 +31,11 @@ jobs:
           $psd1Content = @{
             ModuleVersion = $tagVersion
             Author = 'Otogawa Katsutoshi'
-            Description = 'Description of your module'
-            FunctionsToExport = '*'
-            CmdletsToExport = '*'
-            VariablesToExport = '*'
-            AliasesToExport = '*'
+            Description = 'Windows32 API Kernel32Dll.'
+            FunctionsToExport = `
+              'Get-SystemPowerStatus', `
+              'Get-SystemPreferredUILanguages'
+
             PrivateData = @{
                 PSData = @{
                     ProjectUri = 'https://github.com/YourName/YourModule'
