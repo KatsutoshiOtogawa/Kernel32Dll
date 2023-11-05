@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Setup repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # - name: Install NuGet
       #   run: Install-PackageProvider -Name NuGet -Force -Scope CurrentUser
@@ -35,6 +35,7 @@ jobs:
           $content  -replace '#tagVersion', "$tagVersion" |
             Set-Content -Path Kernel32Dll/Kernel32Dll.psd1
         
+          echo ( $content  -replace '#tagVersion', "$tagVersion")
       - name: Publish Module
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
