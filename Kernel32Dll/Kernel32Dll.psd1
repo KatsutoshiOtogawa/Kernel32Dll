@@ -2,8 +2,6 @@
 # 
 
 @{
-    ModuleName = 'Kernel32Dll'
-
     ModuleVersion = '#tagVersion'
     Author = 'Otogawa Katsutoshi'
     Copyright = 'Otogawa Katsutoshi. All rights reserved.'
@@ -23,7 +21,7 @@
             ReleaseNotes = 'Release notes for version 1.0'
         }
     }
-    RequiredModules = @{
+    # RequiredModules = @{
 
-    }
+    # }
 }
