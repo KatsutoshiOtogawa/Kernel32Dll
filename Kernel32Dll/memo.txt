@@ -1,0 +1,15 @@
+csharpとcppの型
+BOOL -> int 32bit
+DWORD -> uint 32bit
+BYTE -> byte 8bit
+PULONG -> ref uint
+PZZWSTR -> Intptr uint16* ワイド文字なので、uint16。他の引数の配列の長さも渡す。Cのchar[]配列。1
+
+$pointer = [System.Runtime.InteropServices.Marshal]::UnsafeAddrOfPinnedArrayElement($myArray, 0)
+
+# ポインタをIntPtrにキャスト
+[intptr]$intPtr = $pointer
+
+[uint] $pulNumLanguages = 0
+[uint]$buf = 0
+[Kernel32Dll]::GetSystemPreferredUILanguages(0, [ref] $pulNumLanguages, $null,[ref] $buf)
