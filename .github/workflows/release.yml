@@ -29,6 +29,7 @@ jobs:
         # run:  echo "tag=${GITHUB_REF#refs/*/}"
         run:  |
           $tag = $env:GITHUB_REF -replace 'refs/tags/', ''
+          echo $tag
           echo "tag=${tag}" >> $GITHUB_OUTPUT
       - name: Generate PSD1
         run: |
