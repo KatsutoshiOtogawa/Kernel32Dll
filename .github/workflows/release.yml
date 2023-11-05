@@ -31,7 +31,8 @@ jobs:
           $tagVersion = ${{ steps.tag_version.outputs.tag }}
           $tagVersion = $tagVersion -replace '^v', ''  # 先頭の 'v' を削除
           $content = Get-Content Kernel32Dll/Kernel32Dll.psd1 -Raw
-          $content  -replace '$tagVersion', "$tagVersion" |
+          # replace 
+          $content  -replace '#tagVersion', "$tagVersion" |
             Set-Content -Path Kernel32Dll/Kernel32Dll.psd1
         
       - name: Publish Module
