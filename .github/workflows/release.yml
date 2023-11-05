@@ -25,10 +25,11 @@ jobs:
 
       - name: Get Tag Version
         id: tag_version
-        run: echo "::set-output name=tag::${GITHUB_REF##*/}"
+        run: echo "tag=${GITHUB_REF##/*/}" >> $GITHUB_OUTPUT
       - name: Generate PSD1
         run: |
           $tagVersion = ${{ steps.tag_version.outputs.tag }}
+          echo $tagVersion
           $tagVersion = $tagVersion -replace '^v', ''  # 先頭の 'v' を削除
           $content = Get-Content Kernel32Dll/Kernel32Dll.psd1 -Raw
           # replace 
