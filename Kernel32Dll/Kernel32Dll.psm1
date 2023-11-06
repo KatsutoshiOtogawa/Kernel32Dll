@@ -23,5 +23,5 @@ function Get-SystemPreferredUILanguages {
     [uint]$pcchLanguagesBuffer = 0;
     # [Kernel32Dll]::GetSystemPreferredUILanguages(0, [ref] $pulNumLanguages, $null,[ref] $buf)
     # 設定
-    [Kernel32Dll]::GetSystemPreferredUILanguages($dwFlags, [out] $pulNumLanguages, $null,[ref] $pcchLanguagesBuffer)
+    [Kernel32Dll]::GetSystemPreferredUILanguages($dwFlags, [ref] $pulNumLanguages, $null,[ref] $pcchLanguagesBuffer)
 }
