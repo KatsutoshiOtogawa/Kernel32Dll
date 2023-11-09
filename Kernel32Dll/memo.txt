@@ -5,6 +5,13 @@ BYTE -> byte 8bit
 PULONG -> ref uint
 PZZWSTR -> Intptr uint16* ワイド文字なので、uint16。他の引数の配列の長さも渡す。Cのchar[]配列。1
 
+IntPtrデフォルトだと32bitポインタ
+LPCSTR -> Cのchar* sined char csharpのsbyte
+
+LPVOID -> 任意の方へのポインタ。今回は64bit マシンキメウチ。csharpだとpublic IntPtr (void* value)で初期化されたポインタ。
+
+HANDLE -> LPVOID
+
 $pointer = [System.Runtime.InteropServices.Marshal]::UnsafeAddrOfPinnedArrayElement($myArray, 0)
 
 # ポインタをIntPtrにキャスト
@@ -13,3 +20,9 @@ $pointer = [System.Runtime.InteropServices.Marshal]::UnsafeAddrOfPinnedArrayElem
 [uint] $pulNumLanguages = 0
 [uint]$buf = 0
 [Kernel32Dll]::GetSystemPreferredUILanguages(0, [ref] $pulNumLanguages, $null,[ref] $buf)
+
+$encoding = [System.Text.Encoding]::UTF8 # 任意のエンコーディングを選択
+$bytes = $encoding.GetBytes($string)
+
+# バイト配列をsbyteの配列に変換
+$sbytes = [System.SByte[]]::new($bytes.Length)

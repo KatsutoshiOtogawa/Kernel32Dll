@@ -6,13 +6,14 @@
     Author = 'Otogawa Katsutoshi'
     Copyright = 'Otogawa Katsutoshi. All rights reserved.'
     # Supported PSEditions
-    CompatiblePSEditions = 'Core', 'Desktop'
-    PowerShellVersion = '5.1'
+    CompatiblePSEditions = 'Core'
+    PowerShellVersion = '7.2'
     Description = 'Windows32 API Kernel32Dll.'
     GUID = 'f3192037-2de7-4995-bb20-83e4ea6fc3ff'
     ModuleToProcess = 'Kernel32Dll.psm1'
     FunctionsToExport = 'Get-SystemPowerStatus', 
-        'Get-SystemPreferredUILanguages'
+        'Get-SystemPreferredUILanguages',
+        'Create-FileA'
 
     PrivateData = @{
         PSData = @{
